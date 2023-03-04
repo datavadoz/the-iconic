@@ -41,3 +41,4 @@ prefect==2.8.4
 
 # Customization
 pandas==1.5.3
+psycopg2-binary==2.9.5
