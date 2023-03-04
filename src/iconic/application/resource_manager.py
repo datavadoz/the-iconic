@@ -1,9 +1,9 @@
 import os
 import zipfile
+from hashlib import sha256
+
 import requests
 from tqdm import tqdm
-
-from hashlib import sha256
 
 from iconic.service.resource import ResourceService
 
