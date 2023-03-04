@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  worker:
+    image: worker:1.0
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - $PWD/src/:/opt/prefect/src
+    command: prefect server start --host 0.0.0.0
+    networks:
+      - internal
+
+  database:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=the-iconic
+    volumes:
+      - database-volume:/var/lib/postgres/data
+    networks:
+      - internal
+
+  pgadmin:
+    image: dpage/pgadmin4:6.19
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=danhvo.uit@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "8000:80"
+    volumes:
+      - pgadmin-volume:/var/lib/pgadmin
+    networks:
+      - internal
+
+volumes:
+  database-volume:
+  pgadmin-volume:
+
+networks:
+  internal:
