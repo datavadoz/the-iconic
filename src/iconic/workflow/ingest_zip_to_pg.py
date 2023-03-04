@@ -1,20 +1,26 @@
-from prefect import flow, task, get_run_logger
+from prefect import flow, task
 
 from iconic.application.resource_manager import ResourceManager
 
 
 @task
 def download_resource(resource_name, destination):
-    logger = get_run_logger()
     file_path = resource_manager.download_resource(resource_name, destination)
-    logger.info(f'Downloaded {resource_name} at {file_path}')
+    print(f'Downloaded {resource_name} at {file_path}')
     return file_path
 
 
-@flow
+@task
+def extract_resource(resource_name, file_path, destination):
+    resource_manager.extract_zip_resource(resource_name, file_path, destination)
+
+
+@flow(log_prints=True)
 def ingest_zip_to_pg():
-    file_path = download_resource('test_data.zip', '/tmp/')
-    print(file_path)
+    resource_name = 'test_data.zip'
+    destination_path = '/tmp/'
+    file_path = download_resource(resource_name, destination_path)
+    extract_resource(resource_name, file_path, destination_path)
 
 
 if __name__ == '__main__':
