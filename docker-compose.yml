@@ -21,7 +21,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=the-iconic
     volumes:
-      - database-volume:/var/lib/postgres/data
+      - database-volume:/var/lib/postgresql/data
     networks:
       - internal
 
