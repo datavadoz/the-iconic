@@ -1,17 +1,6 @@
 version: '3'
 
 services:
-  worker:
-    image: worker:1.0
-    build:
-      context: .
-      dockerfile: docker/worker/Dockerfile
-    ports:
-      - "4200:4200"
-    command: prefect server start --host 0.0.0.0
-    networks:
-      - internal
-
   database:
     image: postgres:15
     environment:
@@ -34,6 +23,45 @@ services:
       - pgadmin-volume:/var/lib/pgadmin
     networks:
       - internal
+
+  server:
+    image: worker:1.0
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    ports:
+      - "4200:4200"
+    command: prefect server start --host 0.0.0.0
+    networks:
+      - internal
+    depends_on:
+      - database
+
+  report-agent:
+    image: worker:1.0
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    environment:
+      - PREFECT_API_URL=http://server:4200/api
+    command: prefect agent start -q report
+    networks:
+      - internal
+    depends_on:
+      - server
+
+  ingest-agent:
+    image: worker:1.0
+    build:
+      context: .
+      dockerfile: docker/worker/Dockerfile
+    environment:
+      - PREFECT_API_URL=http://server:4200/api
+    command: prefect agent start -q ingest
+    networks:
+      - internal
+    depends_on:
+      - server
 
 volumes:
   database-volume:
