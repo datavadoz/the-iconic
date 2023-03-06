@@ -13,20 +13,20 @@ class ResourceService(BaseService):
     def _get_resource(self, resource_name: str) -> ResourceModel:
         return self.db.get(ResourceModel, resource_name)
 
-    def _get_resource_url(self, resource_name):
+    def get_resource_url(self, resource_name):
         resource = self._get_resource(resource_name)
         if resource is None:
             raise FileNotFoundError
         return resource.resource_url
 
-    def _get_resource_password(self, resource_name):
+    def get_resource_password(self, resource_name):
         resource = self._get_resource(resource_name)
         if resource is None:
             raise FileNotFoundError
         return resource.resource_password
 
     def download_resource(self, resource_name: str, destination: str):
-        url = self._get_resource_url(resource_name)
+        url = self.get_resource_url(resource_name)
         file_path = os.path.join(destination, resource_name)
 
         with requests.get(url, stream=True) as stream:
@@ -43,7 +43,7 @@ class ResourceService(BaseService):
         return file_path
 
     def extract_zip_resource(self, resource_name, file_path, destination):
-        password = self._get_resource_password(resource_name)
+        password = self.get_resource_password(resource_name)
         encrypted_password = sha256(password.encode('utf-8')).hexdigest()
         extracted_file_paths = []
 

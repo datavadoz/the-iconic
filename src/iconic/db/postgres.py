@@ -15,3 +15,6 @@ class Postgres:
     def upsert_df(self, df, model_class):
         df.to_sql(schema='public', name=model_class.__tablename__,
                   con=self.engine, index=False, if_exists='append')
+
+    def query(self, statement):
+        return self.session.execute(statement).fetchall()
