@@ -48,19 +48,19 @@ class EmailService(ResourceService):
                     </tr>
                     <tr>
                         <td>Credit card</td>
-                        <td>$ {message_input['cc_revenue']}</td>
+                        <td>$ {message_input['cc_revenue']:,}</td>
                     </tr>
                     <tr>
                         <td>Average revenue of iOS</td>
-                        <td>$ {message_input['avg_each_platform_revenue']['ios']}</td>
+                        <td>$ {message_input['avg_each_platform_revenue']['ios']:,}</td>
                     </tr>
                     <tr>
                         <td>Average revenue of Android</td>
-                        <td>$ {message_input['avg_each_platform_revenue']['android']}</td>
+                        <td>$ {message_input['avg_each_platform_revenue']['android']:,}</td>
                     </tr>
                     <tr>
                         <td>Average revenue of Desktop</td>
-                        <td>$ {message_input['avg_each_platform_revenue']['desktop']}</td>
+                        <td>$ {message_input['avg_each_platform_revenue']['desktop']:,}</td>
                     </tr>
                 </table>
                 <p>
