@@ -44,7 +44,7 @@ services:
       - PREFECT_ORION_DATABASE_CONNECTION_URL=postgresql+asyncpg://root:root@prefect-db:5432/prefect
     ports:
       - "4200:4200"
-    command: prefect server start --host 0.0.0.0
+    command: /opt/prefect/server-start.sh
     networks:
       - internal
     depends_on:
