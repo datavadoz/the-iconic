@@ -6,6 +6,8 @@ This is the challange project from **The ICONIC**. The main functionality of thi
 - Ingest test_data.zip into database (Postgres).
 - Perform business queries and send a report email every day.
 
+![](images/architecture.png)
+
 ## Prerequisite
 Docker with compose plugin (current version: 20.10.17).
 
