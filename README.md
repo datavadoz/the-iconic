@@ -32,7 +32,7 @@ docker compose up -d
 INSERT INTO resource (resource_name, resource_password)
 VALUES ('your_email@gmail.com', 'your_email_app_password')
 ```
-5. Access Prefect Deployment UI: `http://localhost:4200/deployments` and perform quick run the `ingest-zip-to-pg/ingest_test_data` deloyment to download and ingest [test_data.zip](https://github.com/theiconic/technical-challenges/raw/master/data/sample-data/test_data.zipe) to Postgres database:
+5. Access Prefect Deployment UI: `http://localhost:4200/deployments` and perform quick run the `ingest-zip-to-pg/ingest_test_data` deloyment to download and ingest [test_data.zip](https://github.com/theiconic/technical-challenges/raw/master/data/sample-data/test_data.zip) to Postgres database:
 ![](images/deployment_1.jpg)
 6. After the `ingest-zip-to-pg/ingest_test_data` workflow finish, we perform quick run the `report/daily_report` deployment also to query and send report email. The email should look like as below:
 ![](images/email_1.jpg)
