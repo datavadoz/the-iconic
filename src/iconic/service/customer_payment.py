@@ -8,7 +8,8 @@ class CustomerPaymentService(BaseService):
         return CustomerPaymentModel.get_schema_dict()
 
     def upsert_df(self, df):
-        self.db.upsert_df(df, CustomerPaymentModel)
+        on_conflict_cols = ['customer_id']
+        self.db.upsert_df(df, CustomerPaymentModel, on_conflict_cols)
 
     def get_total_credit_card_revenue(self):
         stmt = """
