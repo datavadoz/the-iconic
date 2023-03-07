@@ -239,7 +239,7 @@ Technically, we can use `crontab` that is provided by Linux to call workflow at 
 
 **4. Notification**
 
-To inform the query result to stakeholders, we need to send an email after the in-chared workflow finish successfully.
+To inform the query result to stakeholders, we need to send an email after the corresponding workflow finishes successfully.
 
 **5. Nice to have**
 
