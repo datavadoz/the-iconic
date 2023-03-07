@@ -31,7 +31,7 @@ class CustomerPaymentService(BaseService):
     def get_average_revenue_for_customer_on_platform(self):
         stmt = """
         WITH _avg_revenue_ios_customer AS (
-            SELECT 'ios' AS platform,ROUND(AVG(revenue)) AS avg_revenue
+            SELECT 'ios' AS platform, ROUND(AVG(revenue)) AS avg_revenue
             FROM customer_payment
             WHERE ios_orders <> 0
         ), _avg_revenue_android_customer AS (
