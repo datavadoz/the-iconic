@@ -42,5 +42,5 @@ prefect==2.16.5
 # Customization
 pandas==1.5.3
 psycopg2-binary==2.9.5
-tqdm==4.65.0
+tqdm==4.66.3
 requests==2.32.2
